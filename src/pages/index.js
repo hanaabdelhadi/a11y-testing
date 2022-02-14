@@ -1,31 +1,41 @@
-import * as React from "react"
-import { Link } from "gatsby"
-import { StaticImage } from "gatsby-plugin-image"
+import React from "react"
+import Helmet from "react-helmet"
 
-import Layout from "../components/layout"
-import Seo from "../components/seo"
+const handleFormSubmit = event => {
+  event.preventDefault()
+  console.log("boop")
+}
 
-const IndexPage = () => (
-  <Layout>
-    <Seo title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <StaticImage
-      src="../images/gatsby-astronaut.png"
-      width={300}
-      quality={95}
-      formats={["auto", "webp", "avif"]}
-      alt="A Gatsby astronaut"
-      style={{ marginBottom: `1.45rem` }}
+document.title = "Accessability testing";
+
+export default () => (
+  <main style={{ color: "#222" }}>
+    <Helmet>
+      <html lang="en" />
+    </Helmet>
+    <h1>Hello accessible world!</h1>
+
+    <img
+      style={{ width: 200 }}
+      src="https://upload.wikimedia.org/wikipedia/commons/5/51/Small_Red_Rose.JPG"
+      alt="Hana's testing"
     />
-    <p>
-      <Link to="/page-2/">Go to page 2</Link> <br />
-      <Link to="/using-typescript/">Go to "Using TypeScript"</Link> <br />
-      <Link to="/using-ssr">Go to "Using SSR"</Link> <br />
-      <Link to="/using-dsg">Go to "Using DSG"</Link>
-    </p>
-  </Layout>
-)
 
-export default IndexPage
+    {/* DON’T DO ANY OF THIS. THIS IS ALL BAD. */}
+    <form onClick={handleFormSubmit}>
+      <label htmlFor="name">Name</label>
+      <input type="text" id="name" name="name" />
+      <button>Submit</button>
+    </form>
+
+    <p>
+      <span role="img" title="tears of joy">
+        😂
+      </span>
+    </p>
+
+    <button data-testid="hello-btn" onClick={() => alert("hello world")}>
+      click me
+    </button>
+  </main>
+)
